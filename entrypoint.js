@@ -1,6 +1,7 @@
 const express = require('express'),
     morgan = require('morgan'),
     config = require('config'),
+    mongoose = require('mongoose'),
     helmet = require('helmet'),
     genres = require('./routes/genres'),
     home = require('./routes/home');
@@ -19,7 +20,11 @@ if (app.get('env') == 'development') {
     app.use(morgan("tiny"));
 }
 
-dbDebugger('connected to database...');
+mongoose.connect('mongodb://localhost:27017/vidly', { useNewUrlParser: true }).then(
+    () => dbDebugger('Connected to MongoDB')
+).catch((e) => {
+    console.error(e.message);
+});
 
 app.set('view engine', 'pug');
 app.set('views', './views');
