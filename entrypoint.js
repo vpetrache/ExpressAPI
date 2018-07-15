@@ -4,6 +4,7 @@ const express = require('express'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
     genres = require('./routes/genres'),
+    customers = require('./routes/customers'),
     home = require('./routes/home');
 
 //export DEBUG=app:startup,app:db or *
@@ -37,6 +38,7 @@ app.use(express.static('public'));
 app.use(helmet());
 app.use('/api/genres', genres);
 app.use('/', home);
+app.use('/api/customers', customers);
 
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)

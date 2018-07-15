@@ -1,20 +1,7 @@
-const mongoose = require('mongoose');
-const express = require('express'),
-    Joi = require('joi');
+const express = require('express');
+let {Genre, validateUserInput} = require('../models/genres');
 dbDebugger = require('debug')('app:db')
 const router = express.Router();
-
-const genreSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        minlength: 3,
-        maxlength: 10,
-        required: true,
-        lowercase: true
-    }
-});
-
-const Genre = mongoose.model('Genre', genreSchema);
 
 //req.params and query params
 //http://localhost:3000/api/genres/3/221?test=int&null=false
@@ -138,12 +125,5 @@ router.delete('/:id', async (req, res) => {
         return res.status(404).send(`The genre with id ${req.params.id} was not found!`)
     }
 })
-
-function validateUserInput(genre) {
-    let schema = {
-        name: Joi.string().min(3).max(10).required()
-    }
-    return Joi.validate(genre, schema);
-};
 
 module.exports = router;
