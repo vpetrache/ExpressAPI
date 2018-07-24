@@ -27,19 +27,20 @@ function validateUserInput(body) {
         name: Joi.string().min(6).required(),
         isGold: Joi.boolean().required(),
         phone: Joi.number().min(10).required()
-    }
+    };
     return Joi.validate(body, Schema);
-};
+}
 
 function validateUserUpdateInput(body) {
     const Schema = {
         name: Joi.string().min(6),
         isGold: Joi.boolean(),
         phone: Joi.number().min(10)
-    }
+    };
     return Joi.validate(body, Schema);
-};
+}
 
 exports.Customer = Customer;
+exports.customerSchema = customerSchema;
 exports.validateUserInput = validateUserInput;
 exports.validateUserUpdateInput = validateUserUpdateInput;

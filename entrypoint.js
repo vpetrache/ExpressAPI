@@ -2,10 +2,15 @@ const express = require('express'),
     morgan = require('morgan'),
     config = require('config'),
     mongoose = require('mongoose'),
+    Joi = require('joi'),
     helmet = require('helmet'),
     genres = require('./routes/genres'),
     customers = require('./routes/customers'),
+    movies = require('./routes/movies'),
+    rentals = require('./routes/rentals'),
     home = require('./routes/home');
+
+Joi.objectId = require('joi-objectid')(Joi);
 
 //export DEBUG=app:startup,app:db or *
 const startupDebugger = require('debug')('app:startup'),
@@ -13,7 +18,7 @@ const startupDebugger = require('debug')('app:startup'),
 
 const app = express();
 
-const logger = require('./midddleware/logger')
+const logger = require('./midddleware/logger');
 const port = process.env.PORT || 3000;
 
 if (app.get('env') == 'development') {
@@ -39,7 +44,9 @@ app.use(helmet());
 app.use('/api/genres', genres);
 app.use('/', home);
 app.use('/api/customers', customers);
+app.use('/api/movies', movies);
+app.use('/api/rentals', rentals);
 
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)
-})
+});

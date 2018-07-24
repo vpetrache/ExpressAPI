@@ -16,9 +16,10 @@ const Genre = mongoose.model('Genre', genreSchema);
 function validateUserInput(genre) {
     let schema = {
         name: Joi.string().min(3).max(10).required()
-    }
+    };
     return Joi.validate(genre, schema);
-};
+}
 
 exports.Genre = Genre;
 exports.validateUserInput = validateUserInput;
+exports.genreSchema = genreSchema;

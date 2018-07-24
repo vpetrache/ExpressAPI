@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     const result = await Genre.find()
         .sort({ name: 1 });
     return res.send(result);
-})
+});
 
 router.get('/:id', async (req, res) => {
     // const genre = genres.find((x) => {
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res) => {
         return res.status(404).send(`The genre with id ${req.params.id} was not found!`)
     }
 
-})
+});
 
 router.post('/', async (req, res) => {
     // let newGenre = {
@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
 
     return res.send(genre);
 
-})
+});
 
 router.put('/:id', async (req, res) => {
     // //search
@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
     }
     return res.status(200).send(genre);
 
-})
+});
 
 router.delete('/:id', async (req, res) => {
     //search
@@ -124,6 +124,6 @@ router.delete('/:id', async (req, res) => {
     catch (err) {
         return res.status(404).send(`The genre with id ${req.params.id} was not found!`)
     }
-})
+});
 
 module.exports = router;

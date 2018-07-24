@@ -3,7 +3,7 @@ async function sendCustomerEmail(){
     console.log(customer);
     if(customer.isGold){
       const movies = await getTopMovies();
-      console.log('Top movies: ', movies);
+      console.log('Top movies.js: ', movies);
       await sendEmail(customer.email, movies);
     }
 }
